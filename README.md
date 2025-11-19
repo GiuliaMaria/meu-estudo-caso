@@ -117,29 +117,6 @@ Mesma da web:
 
 https://proweb.leoproti.com.br/alunos
 
-🟣 3. Deploy no Vercel (Web)
-
-Crie conta no Vercel → https://vercel.com
-
-Conecte seu GitHub
-
-Importe o projeto web/
-
-Selecione framework Vite
-
-Clique em Deploy
-
-🟠 4. Como subir o projeto para o GitHub
-
-Na pasta raiz meu-estudo-caso:
-
-git init
-git add .
-git commit -m "Entrega do estudo de caso"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/meu-estudo-caso.git
-git push -u origin main
-
 📝 Créditos e Referências
 
 React: https://react.dev
