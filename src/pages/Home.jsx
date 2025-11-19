@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Home() {
-  const [alunos, setAlunos] = useState([]);
-
-  useEffect(() => {
-    axios.get("https://proweb.leoproti.com.br/alunos")
-      .then(r => setAlunos(r.data));
-  }, []);
-
+export default function Home({ alunos }) {
   return (
-    <div className="container mt-4">
-      <h1>Lista de Alunos</h1>
-      <ul>
-        {alunos.map(a => (
-          <li key={a.id}>
-            <Link to={`/aluno/${a.id}`}>{a.nome}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="container mt-5">
+      <h1 className="mb-4">Lista de Alunos</h1>
+
+      {alunos.length === 0 ? (
+        <p>Carregando...</p>
+      ) : (
+        <ul className="list-group">
+          {alunos.map((aluno) => (
+            <Link
+              key={aluno.id}
+              to={`/aluno/${aluno.id}`}
+              className="list-group-item list-group-item-action"
+            >
+              <strong>{aluno.nome}</strong>
+            </Link>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

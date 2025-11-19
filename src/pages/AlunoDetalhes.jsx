@@ -1,23 +1,29 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useParams, Link } from "react-router-dom";
 
-export default function AlunoDetalhes() {
+export default function AlunoDetalhes({ alunos }) {
   const { id } = useParams();
-  const [aluno, setAluno] = useState(null);
+  const aluno = alunos.find((a) => a.id == id);
 
-  useEffect(() => {
-    axios.get(`https://proweb.leoproti.com.br/alunos/${id}`)
-      .then(r => setAluno(r.data));
-  }, []);
-
-  if (!aluno) return <p>Carregando...</p>;
+  if (!aluno) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-danger">Aluno não encontrado.</div>
+        <Link to="/" className="btn btn-secondary mt-3">Voltar</Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h1>{aluno.nome}</h1>
-      <p>Email: {aluno.email}</p>
-      <p>Idade: {aluno.idade}</p>
+    <div className="container mt-5">
+      <div className="card shadow p-4">
+        <h2>{aluno.nome}</h2>
+
+        <p><strong>Email:</strong> {aluno.email || "Não informado"}</p>
+        <p><strong>Idade:</strong> {aluno.idade || "Não informada"}</p>
+        <p><strong>Curso:</strong> {aluno.curso || "Não informado"}</p>
+
+        <Link to="/" className="btn btn-primary mt-3">⬅ Voltar para lista</Link>
+      </div>
     </div>
   );
 }
